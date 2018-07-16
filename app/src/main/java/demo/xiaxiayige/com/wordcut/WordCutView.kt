@@ -56,9 +56,13 @@ class WordCutView(context: Context, attrs: AttributeSet?) : LinearLayout(context
         }
     }
 
+    /***
+     * 监听滑动位置
+     */
     fun updateScorllx(x: Int): String {
         var list = ArrayList<Pair<Float, Float>>()
         var selectWord = ""
+        //遍历每个text View的坐标位置
         for (item in 0..childCount) {
             var txtv = getChildAt(item)
             if (txtv != null) {
@@ -73,6 +77,7 @@ class WordCutView(context: Context, attrs: AttributeSet?) : LinearLayout(context
             }
         }
         var wordIndex = -1
+        //变化坐标位置的view
         list.forEachIndexed { index, pair ->
             if (x >= pair.first && x <= pair.second) {
                 wordIndex = index
@@ -83,7 +88,6 @@ class WordCutView(context: Context, attrs: AttributeSet?) : LinearLayout(context
                     var textView = getChildAt(index + 1) as TextView
                     textView.textSize = bigSize.spToPx(context)
                 }
-
             } else {
                 var textView = getChildAt(index) as TextView
                 textView.textSize = defaultSize.spToPx(context)
